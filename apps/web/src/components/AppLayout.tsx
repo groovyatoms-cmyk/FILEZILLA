@@ -17,9 +17,11 @@ export function AppLayout() {
             {t("app.protected")}
           </Badge>
         </header>
-        <main className="flex-1 overflow-y-auto px-4 py-6 pb-20 md:px-8 md:py-8 md:pb-8">
-          <Outlet />
-          <footer className="mx-auto mt-12 flex max-w-3xl items-center justify-center gap-1 border-t-2 border-ink pt-4 text-center text-xs font-medium text-ink-muted">
+        <main className="flex flex-1 flex-col overflow-y-auto px-4 py-6 pb-20 md:px-8 md:py-8 md:pb-8">
+          <div className="flex-1">
+            <Outlet />
+          </div>
+          <footer className="mx-auto mt-12 flex w-full max-w-3xl shrink-0 items-center justify-center gap-1 border-t-2 border-ink pt-4 text-center text-xs font-medium text-ink-muted">
             Made with <Heart size={12} className="fill-danger text-danger" aria-label="love" /> in India by Soumitro Haldar
           </footer>
         </main>

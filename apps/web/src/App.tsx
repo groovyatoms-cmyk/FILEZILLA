@@ -7,23 +7,26 @@ import { Devices } from "./pages/Devices";
 import { History } from "./pages/History";
 import { Settings } from "./pages/Settings";
 import { ToastProvider } from "./components/ui/Toast";
+import { ThemeProvider } from "./hooks/useTheme";
 
 export function App() {
   return (
-    <ToastProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="send" element={<Send />} />
-            <Route path="receive" element={<Receive />} />
-            <Route path="devices" element={<Devices />} />
-            <Route path="history" element={<History />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </ToastProvider>
+    <ThemeProvider>
+      <ToastProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="send" element={<Send />} />
+              <Route path="receive" element={<Receive />} />
+              <Route path="devices" element={<Devices />} />
+              <Route path="history" element={<History />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ToastProvider>
+    </ThemeProvider>
   );
 }

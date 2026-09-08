@@ -25,8 +25,22 @@ test.describe("navigation", () => {
     await expect(page.getByRole("heading", { name: "Settings" })).toBeVisible();
   });
 
-  test("theme toggle switches to dark mode", async ({ page }) => {
-    await page.goto("/settings");
+  test("defaults to dark with no flash, applies theme on every page, and toggles correctly", async ({ page }) => {
+    // Dark is the default even with no stored preference and no prior visit to Settings —
+    // this is what previously broke, since theme was only ever applied by mounting Settings.
+    await page.goto("/send");
+    await expect(page.locator("html")).toHaveClass(/dark/);
+
+    await page.getByRole("link", { name: "Settings" }).click();
+    await expect(page.getByLabel("Theme")).toHaveValue("dark");
+
+    await page.getByLabel("Theme").selectOption("light");
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
+    // Switching away from Settings must not lose the preference or revert it.
+    await page.getByRole("link", { name: "Devices" }).click();
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
+
+    await page.getByRole("link", { name: "Settings" }).click();
     await page.getByLabel("Theme").selectOption("dark");
     await expect(page.locator("html")).toHaveClass(/dark/);
   });

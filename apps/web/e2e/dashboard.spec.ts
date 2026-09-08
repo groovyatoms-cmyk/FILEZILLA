@@ -30,6 +30,14 @@ test.describe("navigation", () => {
     await page.getByLabel("Theme").selectOption("dark");
     await expect(page.locator("html")).toHaveClass(/dark/);
   });
+
+  test("dashboard presents Send and Receive as equal, side-by-side options", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: "New Transfer" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Receive" })).toBeVisible();
+    await page.getByRole("button", { name: "Start Receiving" }).click();
+    await expect(page).toHaveURL(/\/receive$/);
+  });
 });
 
 test.describe("send flow guardrails", () => {

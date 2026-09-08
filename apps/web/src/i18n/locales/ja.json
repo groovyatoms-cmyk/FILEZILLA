@@ -28,6 +28,9 @@
     "or": "または",
     "selectFiles": "ファイルを選択",
     "selectFolder": "フォルダを選択",
+    "sendHint": "共有するファイルまたはフォルダを選択します。",
+    "receiveHint": "他のデバイスのペアリングQRコードをスキャンします。",
+    "startReceiving": "受信を開始",
     "recentTransfers": "最近の転送",
     "noTransfersYet": "まだ転送はありません",
     "noTransfersHint": "最初のファイルを送受信するとここに表示されます。"

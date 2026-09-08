@@ -29,6 +29,9 @@
     "or": "or",
     "selectFiles": "Select Files",
     "selectFolder": "Select Folder",
+    "sendHint": "Pick files or a folder to share.",
+    "receiveHint": "Scan a pairing QR code from another device.",
+    "startReceiving": "Start Receiving",
     "recentTransfers": "Recent Transfers",
     "noTransfersYet": "No transfers yet",
     "noTransfersHint": "Send or receive your first file to see it here."

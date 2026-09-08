@@ -2,34 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Brand palette:
+ *   Ink Black    #000814 — ultra-dark, near-black with a hint of blue
+ *   Prussian Blue #001d3d — inky, profound blue
+ *   Oxford Navy  #003566 — deep, dignified blue
+ *   School Bus Yellow #ffc300 — dynamic, high-visibility gold-yellow
+ *   Gold         #ffd60a — radiant, triumphant shimmer
+ */
 :root {
-  --color-canvas: 255 249 235;
+  --color-canvas: 250 251 253;
   --color-surface: 255 255 255;
-  --color-surface-raised: 255 246 224;
-  --color-border: 24 24 27;
-  --color-ink: 20 20 22;
-  --color-ink-muted: 82 78 92;
-  --color-ink-faint: 142 136 150;
-  --color-accent: 255 71 133;
-  --color-accent-ink: 255 255 255;
+  --color-surface-raised: 238 243 250;
+  --color-border: 0 8 20;
+  --color-ink: 0 8 20;
+  --color-ink-muted: 45 58 77;
+  --color-ink-faint: 121 131 148;
+  --color-accent: 255 195 0;
+  --color-accent-ink: 0 8 20;
   --color-success: 6 158 110;
-  --color-warning: 255 158 11;
-  --color-danger: 235 45 60;
+  --color-warning: 214 129 20;
+  --color-danger: 213 40 55;
 }
 
 .dark {
-  --color-canvas: 20 18 28;
-  --color-surface: 30 27 41;
-  --color-surface-raised: 38 34 51;
-  --color-border: 250 248 245;
-  --color-ink: 248 246 250;
-  --color-ink-muted: 190 184 202;
-  --color-ink-faint: 132 124 148;
-  --color-accent: 255 116 165;
-  --color-accent-ink: 20 14 26;
+  --color-canvas: 0 8 20;
+  --color-surface: 0 29 61;
+  --color-surface-raised: 0 53 102;
+  --color-border: 245 248 252;
+  --color-ink: 245 248 252;
+  --color-ink-muted: 186 198 216;
+  --color-ink-faint: 128 142 163;
+  --color-accent: 255 214 10;
+  --color-accent-ink: 0 8 20;
   --color-success: 66 214 158;
-  --color-warning: 255 189 74;
-  --color-danger: 255 110 122;
+  --color-warning: 255 179 71;
+  --color-danger: 255 99 110;
 }
 
 html,

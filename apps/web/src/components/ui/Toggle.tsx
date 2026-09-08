@@ -9,7 +9,7 @@ export function Toggle({ checked, onChange, label }: { checked: boolean; onChang
       className={`focus-ring relative h-7 w-12 shrink-0 rounded-full border-2 border-ink transition-colors ${checked ? "bg-accent" : "bg-surface-raised"}`}
     >
       <span
-        className={`absolute top-0.5 h-5 w-5 rounded-full border-2 border-ink bg-white transition-transform ${checked ? "translate-x-5" : "translate-x-0.5"}`}
+        className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full border-2 border-ink bg-white transition-transform duration-150 ${checked ? "translate-x-5" : "translate-x-0"}`}
       />
     </button>
   );

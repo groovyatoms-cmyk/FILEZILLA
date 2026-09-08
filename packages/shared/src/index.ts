@@ -107,6 +107,6 @@ export const DEFAULT_SETTINGS: AppSettings = {
   preferDirectP2P: true,
   allowTurnFallback: true,
   connectionTimeoutMs: 20_000,
-  theme: "system",
+  theme: "dark",
   downloadDirectoryLabel: "Downloads / SecureTransfer",
 };

@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import type { AppSettings } from "@securetransfer/shared";
 
 const THEME_STORAGE_KEY = "securetransfer:theme";
+const DEFAULT_THEME: ThemePreference = "dark";
 
 export type ThemePreference = AppSettings["theme"];
 
@@ -17,12 +18,26 @@ function readStoredTheme(): ThemePreference {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
     if (stored === "light" || stored === "dark" || stored === "system") return stored;
   } catch {
-    // ignore — falls back to system default
+    // ignore — falls back to the default below
   }
-  return "system";
+  return DEFAULT_THEME;
 }
 
-export function useTheme(): { theme: ThemePreference; setTheme: (t: ThemePreference) => void } {
+interface ThemeContextValue {
+  theme: ThemePreference;
+  setTheme: (t: ThemePreference) => void;
+}
+
+const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+/**
+ * Mount exactly once, at the app root, so the theme is applied to every page from first
+ * paint — not just whichever page happens to read the setting. `index.html` also carries
+ * an inline script that applies the same stored preference synchronously before React
+ * even loads, so there is no flash of the wrong theme on refresh; this effect keeps it in
+ * sync afterward and reacts to OS-level theme changes when the preference is "system".
+ */
+export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ThemePreference>(readStoredTheme);
 
   useEffect(() => {
@@ -43,5 +58,11 @@ export function useTheme(): { theme: ThemePreference; setTheme: (t: ThemePrefere
     }
   }, []);
 
-  return { theme, setTheme };
+  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
+}
+
+export function useTheme(): ThemeContextValue {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error("useTheme must be used within a ThemeProvider");
+  return ctx;
 }

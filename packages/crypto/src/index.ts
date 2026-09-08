@@ -9,8 +9,11 @@
  *   4-byte salt and a monotonically increasing 8-byte counter forming a unique 96-bit
  *   IV for every chunk under a given key, guaranteeing IV uniqueness without needing
  *   a CSPRNG call per chunk.
- * Integrity: SHA-256 for whole-file and per-chunk hashing.
+ * Integrity: SHA-256 for whole-file and per-chunk hashing (one-shot digests via the
+ *   native Web Crypto API; the incremental whole-file digest uses @noble/hashes, see
+ *   StreamingSha256 below).
  */
+import { sha256 } from "@noble/hashes/sha256";
 
 const subtle = () => globalThis.crypto.subtle;
 
@@ -152,24 +155,22 @@ export async function sha256Hex(data: Uint8Array): Promise<string> {
   return toHex(new Uint8Array(digest));
 }
 
-/** Streaming SHA-256 accumulator for hashing a file chunk-by-chunk without buffering it in memory. */
+/**
+ * Streaming SHA-256 accumulator for hashing a file chunk-by-chunk without buffering the
+ * whole file in memory. `crypto.subtle.digest` has no incremental/update API, so this
+ * uses @noble/hashes — a minimal, widely-audited, dependency-free hash implementation —
+ * for this one gap. Key agreement (ECDH) and bulk encryption (AES-GCM) above still go
+ * through the native Web Crypto API.
+ */
 export class StreamingSha256 {
-  private chunks: Uint8Array[] = [];
-  private totalLength = 0;
+  private readonly hash = sha256.create();
 
   update(chunk: Uint8Array): void {
-    this.chunks.push(chunk);
-    this.totalLength += chunk.length;
+    this.hash.update(chunk);
   }
 
-  async digestHex(): Promise<string> {
-    const combined = new Uint8Array(this.totalLength);
-    let offset = 0;
-    for (const chunk of this.chunks) {
-      combined.set(chunk, offset);
-      offset += chunk.length;
-    }
-    return sha256Hex(combined);
+  digestHex(): string {
+    return toHex(this.hash.digest());
   }
 }
 

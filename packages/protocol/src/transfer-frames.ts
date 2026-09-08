@@ -6,6 +6,7 @@
 import type { FileManifestEntry } from "@securetransfer/shared";
 
 export type ControlFrame =
+  | { type: "receiver-hello"; sessionId: string; publicKey: string }
   | { type: "manifest"; transferId: string; label: string; totalSize: number; files: FileManifestEntry[] }
   | { type: "key-confirmation"; sessionId: string; tag: string }
   | { type: "accept-transfer"; transferId: string }

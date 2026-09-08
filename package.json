@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "npm run dev --workspace=apps/web",
     "server": "npm run dev --workspace=apps/signaling",
-    "build": "npm run build --workspace=packages/shared && npm run build --workspace=packages/crypto && npm run build --workspace=packages/protocol && npm run build --workspace=apps/web",
+    "build": "npm run build --workspace=apps/web && npm run build --workspace=apps/signaling",
     "test": "npm run test --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present"

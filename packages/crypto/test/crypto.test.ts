@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  StreamingSha256,
   buildIv,
   computeKeyConfirmationTag,
   constantTimeEqual,
@@ -123,5 +124,29 @@ describe("hashing and encoding helpers", () => {
     const bytes = globalThis.crypto.getRandomValues(new Uint8Array(37));
     expect(fromHex(toHex(bytes))).toEqual(bytes);
     expect(fromBase64Url(toBase64Url(bytes))).toEqual(bytes);
+  });
+});
+
+describe("StreamingSha256", () => {
+  it("matches the one-shot digest when fed the same bytes in multiple chunks", async () => {
+    const full = new TextEncoder().encode("The quick brown fox jumps over the lazy dog");
+    const expected = await sha256Hex(full);
+
+    const streaming = new StreamingSha256();
+    streaming.update(full.slice(0, 10));
+    streaming.update(full.slice(10, 20));
+    streaming.update(full.slice(20));
+    expect(streaming.digestHex()).toBe(expected);
+  });
+
+  it("produces different digests for different chunking of the same overall bytes vs different content", () => {
+    const a = new StreamingSha256();
+    a.update(new TextEncoder().encode("hello "));
+    a.update(new TextEncoder().encode("world"));
+
+    const b = new StreamingSha256();
+    b.update(new TextEncoder().encode("hello world"));
+
+    expect(a.digestHex()).toBe(b.digestHex());
   });
 });

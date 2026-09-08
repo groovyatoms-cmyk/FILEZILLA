@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { generateEphemeralKeyPair, exportPublicKeyRaw, toBase64Url } from "@securetransfer/crypto";
+import { generateEphemeralKeyPair, exportPublicKeyRaw, randomSessionSalt, toBase64Url } from "@securetransfer/crypto";
 import {
   PairingExpiredError,
   PairingValidationError,
@@ -19,6 +19,7 @@ async function buildPayload(overrides: Partial<PairingPayload> = {}): Promise<Pa
     senderDeviceId: "device-1",
     senderLabel: "Studio Machine",
     publicKey,
+    ivSalt: toBase64Url(randomSessionSalt()),
     transfer: { label: "Design Assets", totalSize: 1024, fileCount: 3 },
     createdAt: now,
     expiresAt: now + 10 * 60 * 1000,

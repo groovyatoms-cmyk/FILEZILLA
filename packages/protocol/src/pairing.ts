@@ -13,6 +13,8 @@ export interface PairingPayload {
   senderLabel: string;
   /** Raw ECDH public key point, base64url-encoded. */
   publicKey: string;
+  /** 4-byte random salt (base64url), combined with a per-chunk counter to form each AES-GCM chunk IV. Not secret. */
+  ivSalt: string;
   transfer: {
     label: string;
     totalSize: number;
@@ -64,6 +66,7 @@ function validatePairingShape(raw: unknown): PairingPayload {
   requireString(r, "senderDeviceId");
   requireString(r, "senderLabel");
   requireString(r, "publicKey");
+  requireString(r, "ivSalt");
   requireNumber(r, "createdAt");
   requireNumber(r, "expiresAt");
   const transfer = r["transfer"];
@@ -79,6 +82,11 @@ function validatePairingShape(raw: unknown): PairingPayload {
     fromBase64Url(r["publicKey"] as string);
   } catch {
     throw new PairingValidationError("Pairing payload has a malformed public key.");
+  }
+  try {
+    if (fromBase64Url(r["ivSalt"] as string).length !== 4) throw new Error();
+  } catch {
+    throw new PairingValidationError("Pairing payload has a malformed IV salt.");
   }
 
   return raw as PairingPayload;

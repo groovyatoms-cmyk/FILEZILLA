@@ -35,7 +35,7 @@ test.describe("navigation", () => {
 test.describe("send flow guardrails", () => {
   test("blocks an executable file and keeps an allowed file", async ({ page }) => {
     await page.goto("/send");
-    const [chooser] = await Promise.all([page.waitForEvent("filechooser"), page.locator('input[type="file"]').click()]);
+    const [chooser] = await Promise.all([page.waitForEvent("filechooser"), page.getByRole("button", { name: /Select Files/i }).click()]);
     await chooser.setFiles({
       name: "installer.exe",
       mimeType: "application/x-msdownload",

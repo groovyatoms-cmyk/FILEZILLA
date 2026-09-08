@@ -1,5 +1,5 @@
 {
-  "app": { "name": "SecureTransfer", "tagline": "スキャンして接続、転送する。", "protected": "保護済み" },
+  "app": { "name": "FILEZILLA v2", "tagline": "スキャンして接続、転送する。", "protected": "保護済み" },
   "nav": {
     "newTransfer": "新規転送",
     "receive": "受信",
@@ -23,7 +23,7 @@
     "hideDiagnostics": "診断の詳細を非表示"
   },
   "dashboard": {
-    "title": "SecureTransfer",
+    "title": "FILEZILLA v2",
     "dropHere": "ここにファイルをドロップ",
     "or": "または",
     "selectFiles": "ファイルを選択",
@@ -34,6 +34,7 @@
   },
   "send": {
     "title": "ファイルを送信",
+    "subtitle": "ファイルまたはフォルダを選択し、QRコードでデバイスをペアリングして暗号化転送を開始します。",
     "dropTitle": "ここにファイルまたはフォルダをドロップ",
     "preparing": "ファイルを準備中…",
     "filesIndexed": "ファイルをインデックス化しました",
@@ -62,7 +63,8 @@
     "established": "確立済み",
     "startingTransfer": "転送を開始しています…",
     "cameraDenied": "カメラへのアクセスが拒否されました。QRシーケンスをスキャンするにはカメラの許可が必要です。",
-    "holdSteady": "送信側のQRを枠内に収めてください。"
+    "holdSteady": "送信側のQRを枠内に収めてください。",
+    "chooseSaveFolder": "保存先フォルダを選択"
   },
   "transfer": {
     "inProgress": "転送中",
@@ -94,7 +96,10 @@
     "thisDevice": "このデバイス",
     "online": "オンライン",
     "pairedDevices": "ペア済みデバイス",
-    "lastConnected": "前回の接続"
+    "lastConnected": "前回の接続",
+    "rename": "デバイス名を変更",
+    "noPairedDevices": "ペア済みデバイスはまだありません",
+    "noPairedDevicesHint": "転送を完了したデバイスがここに表示されます。"
   },
   "history": {
     "title": "転送履歴",

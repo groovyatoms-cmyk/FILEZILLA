@@ -16,6 +16,7 @@ export function Dashboard() {
   const { show } = useToast();
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const folderInputRef = useRef<HTMLInputElement>(null);
 
   const goToSendWithFiles = useCallback(
     (rawFiles: File[]) => {
@@ -56,7 +57,7 @@ export function Dashboard() {
         <p className="text-sm text-ink-faint">{t("dashboard.or")}</p>
         <div className="flex gap-2">
           <Button onClick={() => inputRef.current?.click()}>{t("dashboard.selectFiles")}</Button>
-          <Button variant="secondary" onClick={() => navigate("/send")}>
+          <Button variant="secondary" onClick={() => folderInputRef.current?.click()}>
             <FolderOpen size={16} /> {t("dashboard.selectFolder")}
           </Button>
         </div>
@@ -64,6 +65,16 @@ export function Dashboard() {
           ref={inputRef}
           type="file"
           multiple
+          className="hidden"
+          onChange={(e) => goToSendWithFiles(Array.from(e.target.files ?? []))}
+        />
+        <input
+          ref={folderInputRef}
+          type="file"
+          multiple
+          // @ts-expect-error -- non-standard attributes for directory selection, supported in Chromium/Firefox
+          webkitdirectory=""
+          directory=""
           className="hidden"
           onChange={(e) => goToSendWithFiles(Array.from(e.target.files ?? []))}
         />

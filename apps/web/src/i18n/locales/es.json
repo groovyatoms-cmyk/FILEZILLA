@@ -1,5 +1,5 @@
 {
-  "app": { "name": "SecureTransfer", "tagline": "Escanea. Conecta. Transfiere.", "protected": "Protegido" },
+  "app": { "name": "FILEZILLA v2", "tagline": "Escanea. Conecta. Transfiere.", "protected": "Protegido" },
   "nav": {
     "newTransfer": "Nueva transferencia",
     "receive": "Recibir",
@@ -24,7 +24,7 @@
     "hideDiagnostics": "Ocultar detalles de diagnóstico"
   },
   "dashboard": {
-    "title": "SecureTransfer",
+    "title": "FILEZILLA v2",
     "dropHere": "Suelta los archivos aquí",
     "or": "o",
     "selectFiles": "Seleccionar archivos",
@@ -35,6 +35,7 @@
   },
   "send": {
     "title": "Enviar archivos",
+    "subtitle": "Selecciona archivos o una carpeta y empareja un dispositivo con un código QR para iniciar una transferencia cifrada.",
     "dropTitle": "Suelta archivos o carpetas aquí",
     "preparing": "Preparando archivos…",
     "filesIndexed": "Archivos indexados",
@@ -63,7 +64,8 @@
     "established": "Establecido",
     "startingTransfer": "Iniciando transferencia…",
     "cameraDenied": "Se denegó el acceso a la cámara. Concede permiso de cámara para escanear la secuencia QR.",
-    "holdSteady": "Mantén el QR del remitente dentro del recuadro."
+    "holdSteady": "Mantén el QR del remitente dentro del recuadro.",
+    "chooseSaveFolder": "Elegir carpeta de guardado"
   },
   "transfer": {
     "inProgress": "Transferencia en curso",
@@ -95,7 +97,10 @@
     "thisDevice": "Este dispositivo",
     "online": "En línea",
     "pairedDevices": "Dispositivos emparejados",
-    "lastConnected": "Última conexión"
+    "lastConnected": "Última conexión",
+    "rename": "Cambiar nombre del dispositivo",
+    "noPairedDevices": "Aún no hay dispositivos emparejados",
+    "noPairedDevicesHint": "Los dispositivos con los que completes una transferencia aparecerán aquí."
   },
   "history": {
     "title": "Historial de transferencias",

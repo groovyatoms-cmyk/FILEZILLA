@@ -5,7 +5,7 @@ export const PROTOCOL_VERSION = 1 as const;
 export const SESSION_TTL_MS = 10 * 60 * 1000;
 
 /** Chunk size presets offered in Settings, in bytes. */
-export const CHUNK_SIZE_PRESETS = [1, 2, 4, 8, 16].map((mb) => mb * 1024 * 1024);
+export const CHUNK_SIZE_PRESETS = [1, 2, 4, 8, 16, 32, 64].map((mb) => mb * 1024 * 1024);
 
 /** Default chunk size: balances per-chunk crypto/framing overhead against memory footprint and resume granularity. */
 export const DEFAULT_CHUNK_SIZE = 4 * 1024 * 1024;

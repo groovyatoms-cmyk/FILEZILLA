@@ -1,5 +1,5 @@
 {
-  "app": { "name": "SecureTransfer", "tagline": "Scannen. Verbinden. Übertragen.", "protected": "Geschützt" },
+  "app": { "name": "FILEZILLA v2", "tagline": "Scannen. Verbinden. Übertragen.", "protected": "Geschützt" },
   "nav": {
     "newTransfer": "Neue Übertragung",
     "receive": "Empfangen",
@@ -24,7 +24,7 @@
     "hideDiagnostics": "Diagnosedetails ausblenden"
   },
   "dashboard": {
-    "title": "SecureTransfer",
+    "title": "FILEZILLA v2",
     "dropHere": "Dateien hier ablegen",
     "or": "oder",
     "selectFiles": "Dateien auswählen",
@@ -35,6 +35,7 @@
   },
   "send": {
     "title": "Dateien senden",
+    "subtitle": "Wählen Sie Dateien oder einen Ordner aus und koppeln Sie dann ein Gerät per QR-Code, um eine verschlüsselte Übertragung zu starten.",
     "dropTitle": "Dateien oder Ordner hier ablegen",
     "preparing": "Dateien werden vorbereitet…",
     "filesIndexed": "Dateien indiziert",
@@ -63,7 +64,8 @@
     "established": "Hergestellt",
     "startingTransfer": "Übertragung wird gestartet…",
     "cameraDenied": "Kamerazugriff verweigert. Erlauben Sie den Kamerazugriff, um die QR-Sequenz zu scannen.",
-    "holdSteady": "Halten Sie den Sender-QR im Rahmen."
+    "holdSteady": "Halten Sie den Sender-QR im Rahmen.",
+    "chooseSaveFolder": "Speicherordner wählen"
   },
   "transfer": {
     "inProgress": "Übertragung läuft",
@@ -95,7 +97,10 @@
     "thisDevice": "Dieses Gerät",
     "online": "Online",
     "pairedDevices": "Gekoppelte Geräte",
-    "lastConnected": "Zuletzt verbunden"
+    "lastConnected": "Zuletzt verbunden",
+    "rename": "Gerät umbenennen",
+    "noPairedDevices": "Noch keine gekoppelten Geräte",
+    "noPairedDevicesHint": "Geräte, mit denen Sie eine Übertragung abschließen, werden hier angezeigt."
   },
   "history": {
     "title": "Übertragungsverlauf",

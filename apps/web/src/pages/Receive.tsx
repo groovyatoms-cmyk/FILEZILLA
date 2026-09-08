@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Check, Circle } from "lucide-react";
+import { Check, Circle, FolderOpen } from "lucide-react";
 import { QrPartsCollector, parsePairingPayload, type PairingPayload } from "@securetransfer/protocol";
 import type { ConnectionKind, FileManifestEntry, TransferManifest } from "@securetransfer/shared";
 import { QRScanner } from "../components/QRScanner";
@@ -44,12 +44,30 @@ export function Receive() {
   const [errorMessage, setErrorMessage] = useState("");
   const sessionRef = useRef<ReceiverPairingSession | null>(null);
   const directoryHandleRef = useRef<FileSystemDirectoryHandle | null>(null);
+  const [chosenFolderName, setChosenFolderName] = useState<string | null>(null);
   const startedAtRef = useRef<number>(0);
   const pausedScanRef = useRef(false);
   const manifestRef = useRef<TransferManifest | null>(null);
   const payloadRef = useRef<PairingPayload | null>(null);
 
   useEffect(() => () => sessionRef.current?.close(), []);
+
+  /**
+   * `showDirectoryPicker()` only works inside a real user gesture (a click handler) — it
+   * cannot be called automatically after an async chain like QR scanning/pairing, or the
+   * browser rejects it. So this is only ever invoked directly from an onClick, never from
+   * inside connectToSender's own async flow.
+   */
+  const pickDirectory = useCallback(async (): Promise<void> => {
+    if (!window.showDirectoryPicker) return;
+    try {
+      const handle = await window.showDirectoryPicker({ mode: "readwrite" });
+      directoryHandleRef.current = handle;
+      setChosenFolderName(handle.name);
+    } catch {
+      // User cancelled the picker, or the browser denied it — keep whatever was set before.
+    }
+  }, []);
 
   const onDetect = useCallback(
     (text: string) => {
@@ -90,18 +108,9 @@ export function Receive() {
       const session = new ReceiverPairingSession(config.signalingUrl, parsed);
       sessionRef.current = session;
 
-      let directoryHandle: FileSystemDirectoryHandle | null = null;
-      if (window.showDirectoryPicker) {
-        try {
-          directoryHandle = await window.showDirectoryPicker({ mode: "readwrite" });
-        } catch {
-          directoryHandle = null;
-        }
-      }
-      directoryHandleRef.current = directoryHandle;
-
+      // Uses whatever folder (if any) the user already picked via a real click — see pickDirectory.
       const createSink = (entry: FileManifestEntry): FileSink =>
-        directoryHandle ? new FileSystemAccessSink(directoryHandle, entry.relativePath) : new MemoryDownloadSink();
+        directoryHandleRef.current ? new FileSystemAccessSink(directoryHandleRef.current, entry.relativePath) : new MemoryDownloadSink();
 
       await session.connect(
         {
@@ -164,6 +173,13 @@ export function Receive() {
         <QRScanner onDetect={onDetect} />
         <p className="text-xs text-ink-faint">{t("receive.holdSteady")}</p>
         {scanError && <p className="text-xs text-warning">{scanError}</p>}
+
+        {window.showDirectoryPicker && (
+          <Button variant="secondary" size="sm" onClick={() => void pickDirectory()}>
+            <FolderOpen size={14} />
+            {chosenFolderName ? `${t("transfer.savedTo")}: ${chosenFolderName}` : t("receive.chooseSaveFolder")}
+          </Button>
+        )}
         <div>
           <p className="mb-1 text-xs font-medium text-ink-muted">{t("receive.partsScanned")}</p>
           <div className="flex flex-wrap justify-center gap-2">
@@ -205,6 +221,12 @@ export function Receive() {
             <Row label={t("receive.files")} value={String(manifest.files.length)} />
           </CardBody>
         </Card>
+        {window.showDirectoryPicker && (
+          <Button variant="secondary" size="sm" onClick={() => void pickDirectory()} className="self-center">
+            <FolderOpen size={14} />
+            {chosenFolderName ? `${t("transfer.savedTo")}: ${chosenFolderName}` : t("receive.chooseSaveFolder")}
+          </Button>
+        )}
         <div className="flex justify-center gap-2">
           <Button
             variant="secondary"
@@ -216,7 +238,8 @@ export function Receive() {
             {t("common.cancel")}
           </Button>
           <Button
-            onClick={() => {
+            onClick={async () => {
+              if (!directoryHandleRef.current) await pickDirectory();
               sessionRef.current?.acceptTransfer(manifest.transferId);
               setPhase("transferring");
             }}

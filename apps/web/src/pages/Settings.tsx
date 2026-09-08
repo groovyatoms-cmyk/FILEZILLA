@@ -95,7 +95,7 @@ export function Settings() {
               id={parallelChunksId}
               value={settings.parallelChunks}
               onChange={(v) => updateSettings({ parallelChunks: v })}
-              options={[1, 2, 4, 8].map((n) => ({ value: n, label: String(n) }))}
+              options={[1, 2, 4, 8, 16, 32].map((n) => ({ value: n, label: String(n) }))}
             />
           </Row>
           <Row label={t("settings.bandwidthLimit")} htmlFor={bandwidthLimitId}>
@@ -105,8 +105,10 @@ export function Settings() {
               onChange={(v) => updateSettings({ bandwidthLimitBytesPerSec: v === 0 ? null : v })}
               options={[
                 { value: 0, label: "Unlimited" },
-                { value: 5 * 1024 * 1024, label: `${formatBytes(5 * 1024 * 1024)}/s` },
-                { value: 20 * 1024 * 1024, label: `${formatBytes(20 * 1024 * 1024)}/s` },
+                ...[1, 5, 10, 20, 50, 100, 250].map((mb) => ({
+                  value: mb * 1024 * 1024,
+                  label: `${formatBytes(mb * 1024 * 1024)}/s`,
+                })),
               ]}
             />
           </Row>

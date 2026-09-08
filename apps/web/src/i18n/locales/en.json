@@ -1,5 +1,5 @@
 {
-  "app": { "name": "SecureTransfer", "tagline": "Scan. Connect. Transfer.", "protected": "Protected" },
+  "app": { "name": "FILEZILLA v2", "tagline": "Scan. Connect. Transfer.", "protected": "Protected" },
   "nav": {
     "newTransfer": "New Transfer",
     "receive": "Receive",
@@ -24,7 +24,7 @@
     "hideDiagnostics": "Hide diagnostic details"
   },
   "dashboard": {
-    "title": "SecureTransfer",
+    "title": "FILEZILLA v2",
     "dropHere": "Drop files here",
     "or": "or",
     "selectFiles": "Select Files",
@@ -35,6 +35,7 @@
   },
   "send": {
     "title": "Send Files",
+    "subtitle": "Select files or a folder, then pair a device with a QR code to start an encrypted transfer.",
     "dropTitle": "Drop files or folders here",
     "preparing": "Preparing files…",
     "filesIndexed": "Files indexed",
@@ -63,7 +64,8 @@
     "established": "Established",
     "startingTransfer": "Starting transfer…",
     "cameraDenied": "Camera access was denied. Grant camera permission to scan the sender's QR sequence.",
-    "holdSteady": "Hold the sender QR inside the frame."
+    "holdSteady": "Hold the sender QR inside the frame.",
+    "chooseSaveFolder": "Choose save folder"
   },
   "transfer": {
     "inProgress": "Transfer in Progress",
@@ -95,7 +97,10 @@
     "thisDevice": "This Device",
     "online": "Online",
     "pairedDevices": "Paired Devices",
-    "lastConnected": "Last connected"
+    "lastConnected": "Last connected",
+    "rename": "Rename device",
+    "noPairedDevices": "No paired devices yet",
+    "noPairedDevicesHint": "Devices you complete a transfer with will appear here."
   },
   "history": {
     "title": "Transfer History",

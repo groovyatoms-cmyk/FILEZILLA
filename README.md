@@ -106,9 +106,15 @@ Requirements: Node.js ≥ 18.18 (repo developed against Node 22), npm ≥ 10.
 
 ```bash
 npm install               # installs all workspaces
-npm run server            # starts the signaling server on ws://localhost:8787
-npm run dev                # starts the web app on http://localhost:5173 (separate terminal)
+npm run dev               # starts BOTH the signaling server (ws://localhost:8787) and the
+                           # web app (http://localhost:5173) together, in one terminal
 ```
+
+The web app needs the signaling server to be reachable for any Send/Receive pairing to
+work — without it you'll see `ERR_CONNECTION_REFUSED` in the console and an "Unable to
+establish a secure connection" screen in the app. `npm run dev` starts both together for
+exactly this reason. To run them in separate terminals instead (e.g. for isolated
+debugging), use `npm run server` and `npm run dev:web`.
 
 Other scripts (run from the repo root, applied across all workspaces where applicable):
 
@@ -314,7 +320,7 @@ response.
 
 | Symptom | Likely cause / fix |
 |---|---|
-| "Unable to establish a secure connection" right after generating a QR | The signaling server isn't running or `VITE_SIGNALING_URL` doesn't point at it. Start it with `npm run server`. |
+| Console shows `WebSocket connection to 'ws://localhost:8787/' failed: ERR_CONNECTION_REFUSED`, or the app shows "Unable to establish a secure connection" right after generating a QR | The signaling server isn't running, or `VITE_SIGNALING_URL` doesn't point at it. Use `npm run dev` (starts both together) rather than only `npm run dev:web`, or start it on its own with `npm run server`. |
 | Camera screen shows "camera access was denied" | Grant camera permission in the browser's site settings and reload; HTTPS (or `localhost`) is required for camera access in all browsers. |
 | Transfer stays on "Relay" instead of "Direct P2P" | Expected on restrictive NATs/networks; if no TURN server is configured (`VITE_TURN_URL` unset) and a direct path can't be found, the transfer will fail to connect at all rather than silently using a relay that doesn't exist — configure a TURN server for reliable connectivity across arbitrary networks. |
 | Large received file didn't prompt a save location | Your browser lacks the File System Access API; the file is buffered and offered as a normal browser download instead — see §11. |

@@ -3,18 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#000814" id="theme-color-meta" />
+    <!-- Makes "Add to Home Screen" launch full-screen with no browser chrome, like a native app. -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="FILEZILLA v2" />
     <script>
       // Applies the stored theme before first paint so there is no flash of the wrong
       // theme on load/refresh. Must stay logically in sync with src/hooks/useTheme.tsx
-      // (same storage key, same "dark" default, same "system" resolution).
+      // (same storage key, same "dark" default, same "system" resolution, same
+      // theme-color-meta sync — src/hooks/useTheme.tsx keeps it updated after this).
       (function () {
         try {
           var stored = localStorage.getItem("securetransfer:theme");
           var theme = stored === "light" || stored === "dark" || stored === "system" ? stored : "dark";
           var isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
           if (isDark) document.documentElement.classList.add("dark");
+          var meta = document.getElementById("theme-color-meta");
+          if (meta) meta.setAttribute("content", isDark ? "#000814" : "#fafbfd");
         } catch (e) {}
       })();
     </script>

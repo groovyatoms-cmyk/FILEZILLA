@@ -9,3 +9,12 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </StrictMode>,
 );
+
+// Registered only in production builds — in dev it would fight with Vite's own module
+// server and HMR. Failing silently is fine: the app works identically without it, just
+// without the "Add to Home Screen" install prompt and offline app shell.
+if (import.meta.env.PROD && "serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  });
+}

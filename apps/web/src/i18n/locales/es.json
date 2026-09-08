@@ -67,6 +67,9 @@
     "established": "Establecido",
     "startingTransfer": "Iniciando transferencia…",
     "cameraDenied": "Se denegó el acceso a la cámara. Concede permiso de cámara para escanear la secuencia QR.",
+    "cameraNotFound": "No se encontró ninguna cámara en este dispositivo. Usa un dispositivo con cámara para escanear la secuencia QR.",
+    "cameraInUse": "La cámara ya está en uso por otra aplicación o pestaña. Ciérrala e inténtalo de nuevo.",
+    "cameraUnsupported": "Este navegador no admite el acceso a la cámara. Prueba con una versión actualizada de Chrome, Safari, Edge o Firefox.",
     "holdSteady": "Mantén el QR del remitente dentro del recuadro.",
     "chooseSaveFolder": "Elegir carpeta de guardado"
   },

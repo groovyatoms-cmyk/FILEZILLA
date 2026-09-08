@@ -67,6 +67,9 @@
     "established": "Établi",
     "startingTransfer": "Démarrage du transfert…",
     "cameraDenied": "Accès à la caméra refusé. Autorisez la caméra pour scanner la séquence QR.",
+    "cameraNotFound": "Aucune caméra détectée sur cet appareil. Utilisez un appareil avec caméra pour scanner la séquence QR.",
+    "cameraInUse": "La caméra est déjà utilisée par une autre application ou un autre onglet. Fermez-la et réessayez.",
+    "cameraUnsupported": "Ce navigateur ne prend pas en charge l'accès à la caméra. Essayez une version à jour de Chrome, Safari, Edge ou Firefox.",
     "holdSteady": "Maintenez le QR de l'expéditeur dans le cadre.",
     "chooseSaveFolder": "Choisir le dossier de sauvegarde"
   },

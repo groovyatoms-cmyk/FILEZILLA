@@ -11,6 +11,9 @@ function applyTheme(preference: ThemePreference): void {
   const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const isDark = preference === "dark" || (preference === "system" && systemDark);
   root.classList.toggle("dark", isDark);
+  // Keeps the mobile browser chrome / PWA title bar color matching the actual theme,
+  // including when it changes at runtime (index.html's inline script only covers first paint).
+  document.getElementById("theme-color-meta")?.setAttribute("content", isDark ? "#000814" : "#fafbfd");
 }
 
 function readStoredTheme(): ThemePreference {

@@ -67,6 +67,9 @@
     "established": "Hergestellt",
     "startingTransfer": "Übertragung wird gestartet…",
     "cameraDenied": "Kamerazugriff verweigert. Erlauben Sie den Kamerazugriff, um die QR-Sequenz zu scannen.",
+    "cameraNotFound": "Auf diesem Gerät wurde keine Kamera gefunden. Verwenden Sie ein Gerät mit Kamera, um die QR-Sequenz zu scannen.",
+    "cameraInUse": "Die Kamera wird bereits von einer anderen App oder einem anderen Tab verwendet. Schließen Sie diese und versuchen Sie es erneut.",
+    "cameraUnsupported": "Dieser Browser unterstützt keinen Kamerazugriff. Verwenden Sie eine aktuelle Version von Chrome, Safari, Edge oder Firefox.",
     "holdSteady": "Halten Sie den Sender-QR im Rahmen.",
     "chooseSaveFolder": "Speicherordner wählen"
   },

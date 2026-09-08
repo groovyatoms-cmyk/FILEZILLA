@@ -66,6 +66,9 @@
     "established": "確立済み",
     "startingTransfer": "転送を開始しています…",
     "cameraDenied": "カメラへのアクセスが拒否されました。QRシーケンスをスキャンするにはカメラの許可が必要です。",
+    "cameraNotFound": "このデバイスにはカメラが見つかりませんでした。カメラ付きのデバイスでQRシーケンスをスキャンしてください。",
+    "cameraInUse": "カメラは他のアプリまたはタブですでに使用されています。閉じてからもう一度お試しください。",
+    "cameraUnsupported": "このブラウザはカメラアクセスに対応していません。最新のChrome、Safari、Edge、Firefoxをお試しください。",
     "holdSteady": "送信側のQRを枠内に収めてください。",
     "chooseSaveFolder": "保存先フォルダを選択"
   },

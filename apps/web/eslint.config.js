@@ -5,7 +5,9 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 
 export default [
-  { ignores: ["dist", "coverage", "playwright-report", "test-results"] },
+  // public/ is copied verbatim by Vite (not bundled/typechecked); sw.js in particular
+  // runs in the ServiceWorkerGlobalScope, a different global environment than our source.
+  { ignores: ["dist", "coverage", "playwright-report", "test-results", "public"] },
   js.configs.recommended,
   {
     files: ["**/*.{ts,tsx}"],

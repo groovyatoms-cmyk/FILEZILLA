@@ -24,8 +24,15 @@ export interface QrFragment {
   c: string;
 }
 
-/** Conservative default: keeps the rendered QR at a low-enough version to stay reliably scannable on phone cameras. */
-export const DEFAULT_MAX_FRAGMENT_BYTES = 700;
+/**
+ * Conservative default: at error-correction level M, 700 bytes/fragment (the original
+ * value here) produces a version-23 QR (109x109 modules) — at typical on-screen render
+ * sizes that's under 3px per module, which is unreliably dense for a phone camera to
+ * scan, especially screen-to-screen (moire, focus hunting, motion blur). 150 bytes keeps
+ * fragments at version ~13 (69x69 modules), which stays comfortably scannable while
+ * still keeping the total fragment count reasonable for typical pairing payload sizes.
+ */
+export const DEFAULT_MAX_FRAGMENT_BYTES = 150;
 
 export async function splitPayloadIntoQrFragments(
   payload: Uint8Array,

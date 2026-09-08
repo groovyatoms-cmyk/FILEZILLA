@@ -206,6 +206,18 @@ foreign-session fragments, and detects a QR sequence that was regenerated mid-sc
 `packages/protocol/src/qr.ts` and its tests for the exact behavior under every failure
 mode (missing/duplicate/reordered/corrupt fragments).
 
+**Fragment size and scannability.** Each fragment defaults to 150 raw bytes
+(`DEFAULT_MAX_FRAGMENT_BYTES`), which keeps the rendered QR at roughly version 13
+(69x69 modules) — comfortably scannable by a phone camera at typical display sizes. A
+larger fragment size isn't free: cramming more data into one QR code means smaller
+modules for the *same* physical screen size, which is exactly what makes screen-to-screen
+QR scanning fail in practice (moire, focus hunting, motion blur — a denser code has much
+less margin against all of them). `apps/web/src/features/pairing/qr-roundtrip.test.ts`
+encodes this as an executable check: it rasterizes fragments at `QRCodeDisplay`'s actual
+on-screen size, runs them through a simulated mild camera blur, and asserts they still
+decode via jsQR — the same decoder the live scanner uses — and separately documents that
+the previous 700-byte default fails to decode at that size even with *zero* blur.
+
 ## 10. File transfer protocol
 
 - **Chunk size:** configurable (1/2/4/8/16 MB), default **4 MB** — small enough to keep
@@ -232,9 +244,10 @@ mode (missing/duplicate/reordered/corrupt fragments).
 | Feature | Behavior when unsupported |
 |---|---|
 | File System Access API (`showDirectoryPicker`, incremental file writes) | Falls back to buffering the file in memory and triggering a standard browser download when complete. This means very large files can be memory-intensive in this fallback path — Chromium-based desktop browsers currently offer the best experience for large transfers. |
-| `getUserMedia` (camera) | The Receive screen shows a clear "camera access was denied" state with instructions; there is no way to scan a QR sequence without camera access. |
+| `getUserMedia` (camera) | The Receive screen distinguishes permission denial, no camera present, the camera being in use by another app, and an unsupported browser, each with its own message and instructions — there is no way to scan a QR sequence without camera access. |
 | WebRTC DataChannel | Required — there is no fallback transport. All evergreen browsers support it. |
 | Web Workers | Required for off-main-thread crypto; supported everywhere WebRTC is. |
+| Web app manifest + service worker (installability) | On supporting browsers (Chromium-based desktop/Android, Safari on iOS via "Add to Home Screen"), the app can be installed to the home screen/app list and launches in `standalone` display mode with no browser chrome. The service worker only does best-effort stale-while-revalidate caching of the app shell — it is not an offline-first cache of transfer data, and pairing/signaling connections still require a live network. |
 
 SecureTransfer cannot provide true OS-level background transfers, persistent
 background camera access, or guaranteed large-file writes on browsers/platforms that

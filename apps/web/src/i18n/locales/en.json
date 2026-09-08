@@ -67,6 +67,9 @@
     "established": "Established",
     "startingTransfer": "Starting transfer…",
     "cameraDenied": "Camera access was denied. Grant camera permission to scan the sender's QR sequence.",
+    "cameraNotFound": "No camera was found on this device. Use a device with a camera to scan the sender's QR sequence.",
+    "cameraInUse": "The camera is already in use by another app or browser tab. Close it and try again.",
+    "cameraUnsupported": "This browser doesn't support camera access. Try an up-to-date Chrome, Safari, Edge, or Firefox.",
     "holdSteady": "Hold the sender QR inside the frame.",
     "chooseSaveFolder": "Choose save folder"
   },

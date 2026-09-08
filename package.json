@@ -1,0 +1,24 @@
+{
+  "name": "secure-transfer",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Secure P2P file transfer application (SecureTransfer)",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=apps/web",
+    "server": "npm run dev --workspace=apps/signaling",
+    "build": "npm run build --workspace=apps/web && npm run build --workspace=apps/signaling",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  }
+}

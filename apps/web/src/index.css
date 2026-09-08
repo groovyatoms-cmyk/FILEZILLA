@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-canvas: 255 249 235;
+  --color-surface: 255 255 255;
+  --color-surface-raised: 255 246 224;
+  --color-border: 24 24 27;
+  --color-ink: 20 20 22;
+  --color-ink-muted: 82 78 92;
+  --color-ink-faint: 142 136 150;
+  --color-accent: 255 71 133;
+  --color-accent-ink: 255 255 255;
+  --color-success: 6 158 110;
+  --color-warning: 255 158 11;
+  --color-danger: 235 45 60;
+}
+
+.dark {
+  --color-canvas: 20 18 28;
+  --color-surface: 30 27 41;
+  --color-surface-raised: 38 34 51;
+  --color-border: 250 248 245;
+  --color-ink: 248 246 250;
+  --color-ink-muted: 190 184 202;
+  --color-ink-faint: 132 124 148;
+  --color-accent: 255 116 165;
+  --color-accent-ink: 20 14 26;
+  --color-success: 66 214 158;
+  --color-warning: 255 189 74;
+  --color-danger: 255 110 122;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-canvas text-ink antialiased;
+  font-feature-settings: "cv11", "ss01";
+  background-image: radial-gradient(rgb(var(--color-ink) / 0.06) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+* {
+  border-color: rgb(var(--color-border));
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.01em;
+}
+
+/* Comic-panel treatment: bold ink outline + hard offset shadow instead of soft blur. */
+.comic-panel {
+  @apply border-2 border-ink shadow-comic;
+}
+
+.comic-panel-sm {
+  @apply border-2 border-ink shadow-comic-sm;
+}
+
+::selection {
+  background: rgb(var(--color-accent) / 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.focus-ring {
+  @apply outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas;
+}

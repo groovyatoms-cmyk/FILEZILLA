@@ -258,8 +258,11 @@ npm run test --workspace=packages/crypto          # ECDH/AES-GCM/SHA-256 correct
 npm run test --workspace=packages/protocol        # pairing payload validation, QR split/reconstruct
 npm run test --workspace=apps/signaling            # session store (2-device cap, expiry), rate limiter
 npm run test --workspace=apps/web                  # utils, chunker, a component test, a pairing/QR integration test
-npm run test:e2e --workspace=apps/web              # Playwright browser tests (requires the app running)
+npm run test:e2e --workspace=apps/web              # Playwright browser tests (auto-starts the dev server)
 ```
+
+If Playwright can't find your Chromium install in a locked-down/sandboxed environment, set
+`PLAYWRIGHT_CHROMIUM_PATH` to the binary's path before running `test:e2e`.
 
 Test coverage specifically includes the required failure-mode matrix: missing QR
 fragments, duplicate fragments, reordered fragments, invalid checksums, a regenerated QR

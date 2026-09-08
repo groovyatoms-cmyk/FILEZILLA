@@ -10,14 +10,16 @@ import { useTransferHistory } from "../hooks/useTransferHistory";
 import { useTheme } from "../hooks/useTheme";
 import { SUPPORTED_LANGUAGES, setLanguage, type LanguageCode } from "../i18n";
 import { formatBytes, formatDuration } from "../utils/format";
-import { useState } from "react";
+import { useId, useState } from "react";
 import i18n from "../i18n";
 
-function Row({ label, description, children }: { label: string; description?: string; children: ReactNode }) {
+function Row({ label, description, htmlFor, children }: { label: string; description?: string; htmlFor?: string; children: ReactNode }) {
   return (
     <div className="flex items-center justify-between gap-4 py-3">
       <div>
-        <p className="text-sm font-medium text-ink">{label}</p>
+        <label htmlFor={htmlFor} className="text-sm font-medium text-ink">
+          {label}
+        </label>
         {description && <p className="text-xs text-ink-muted">{description}</p>}
       </div>
       {children}
@@ -25,16 +27,27 @@ function Row({ label, description, children }: { label: string; description?: st
   );
 }
 
-function Select<T extends string | number>({ value, onChange, options }: { value: T; onChange: (v: T) => void; options: { value: T; label: string }[] }) {
+function Select<T extends string | number>({
+  id,
+  value,
+  onChange,
+  options,
+}: {
+  id?: string;
+  value: T;
+  onChange: (v: T) => void;
+  options: { value: T; label: string }[];
+}) {
   return (
     <select
+      id={id}
       value={String(value)}
       onChange={(e) => {
         const raw = e.target.value;
         const match = options.find((o) => String(o.value) === raw);
         if (match) onChange(match.value);
       }}
-      className="focus-ring rounded-md border border-border bg-surface px-2.5 py-1.5 text-sm text-ink"
+      className="focus-ring rounded-md border-2 border-ink bg-surface px-2.5 py-1.5 text-sm font-medium text-ink"
     >
       {options.map((o) => (
         <option key={String(o.value)} value={String(o.value)}>
@@ -51,6 +64,13 @@ export function Settings() {
   const { clear } = useTransferHistory();
   const { theme, setTheme } = useTheme();
   const [confirmClear, setConfirmClear] = useState(false);
+  const chunkSizeId = useId();
+  const parallelChunksId = useId();
+  const bandwidthLimitId = useId();
+  const sessionExpirationId = useId();
+  const connectionTimeoutId = useId();
+  const themeId = useId();
+  const languageId = useId();
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6">
@@ -62,22 +82,25 @@ export function Settings() {
           <Row label={t("settings.autoStartTransfers")}>
             <Toggle checked={settings.autoStartTransfers} onChange={(v) => updateSettings({ autoStartTransfers: v })} label={t("settings.autoStartTransfers")} />
           </Row>
-          <Row label={t("settings.chunkSize")}>
+          <Row label={t("settings.chunkSize")} htmlFor={chunkSizeId}>
             <Select
+              id={chunkSizeId}
               value={settings.chunkSize}
               onChange={(v) => updateSettings({ chunkSize: v })}
               options={CHUNK_SIZE_PRESETS.map((s) => ({ value: s, label: formatBytes(s) }))}
             />
           </Row>
-          <Row label={t("settings.parallelChunks")}>
+          <Row label={t("settings.parallelChunks")} htmlFor={parallelChunksId}>
             <Select
+              id={parallelChunksId}
               value={settings.parallelChunks}
               onChange={(v) => updateSettings({ parallelChunks: v })}
               options={[1, 2, 4, 8].map((n) => ({ value: n, label: String(n) }))}
             />
           </Row>
-          <Row label={t("settings.bandwidthLimit")}>
+          <Row label={t("settings.bandwidthLimit")} htmlFor={bandwidthLimitId}>
             <Select
+              id={bandwidthLimitId}
               value={settings.bandwidthLimitBytesPerSec ?? 0}
               onChange={(v) => updateSettings({ bandwidthLimitBytesPerSec: v === 0 ? null : v })}
               options={[
@@ -96,8 +119,9 @@ export function Settings() {
           <Row label={t("settings.askBeforeReceiving")}>
             <Toggle checked={settings.askBeforeReceiving} onChange={(v) => updateSettings({ askBeforeReceiving: v })} label={t("settings.askBeforeReceiving")} />
           </Row>
-          <Row label={t("settings.sessionExpiration")}>
+          <Row label={t("settings.sessionExpiration")} htmlFor={sessionExpirationId}>
             <Select
+              id={sessionExpirationId}
               value={settings.sessionTtlMs}
               onChange={(v) => updateSettings({ sessionTtlMs: v })}
               options={[5, 10, 15, 30].map((m) => ({ value: m * 60_000, label: formatDuration(m * 60) }))}
@@ -127,8 +151,9 @@ export function Settings() {
           <Row label={t("settings.allowTurnFallback")}>
             <Toggle checked={settings.allowTurnFallback} onChange={(v) => updateSettings({ allowTurnFallback: v })} label={t("settings.allowTurnFallback")} />
           </Row>
-          <Row label={t("settings.connectionTimeout")}>
+          <Row label={t("settings.connectionTimeout")} htmlFor={connectionTimeoutId}>
             <Select
+              id={connectionTimeoutId}
               value={settings.connectionTimeoutMs}
               onChange={(v) => updateSettings({ connectionTimeoutMs: v })}
               options={[10, 20, 30, 60].map((s) => ({ value: s * 1000, label: formatDuration(s) }))}
@@ -140,8 +165,9 @@ export function Settings() {
       <Card>
         <CardHeader className="text-sm font-semibold text-ink">{t("settings.appearance")}</CardHeader>
         <CardBody className="divide-y divide-border">
-          <Row label={t("settings.theme")}>
+          <Row label={t("settings.theme")} htmlFor={themeId}>
             <Select
+              id={themeId}
               value={theme}
               onChange={setTheme}
               options={[
@@ -151,8 +177,9 @@ export function Settings() {
               ]}
             />
           </Row>
-          <Row label={t("settings.language")}>
+          <Row label={t("settings.language")} htmlFor={languageId}>
             <Select
+              id={languageId}
               value={(i18n.language as LanguageCode) ?? "en"}
               onChange={(v: LanguageCode) => setLanguage(v)}
               options={SUPPORTED_LANGUAGES.map((l) => ({ value: l.code, label: l.label }))}

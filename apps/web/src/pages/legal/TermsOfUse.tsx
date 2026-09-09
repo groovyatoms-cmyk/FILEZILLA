@@ -4,9 +4,9 @@ import { LegalLayout, LegalSection } from "./LegalLayout";
 export function TermsOfUse() {
   return (
     <LegalLayout title="Terms of Use" updated="September 2026">
-      <LegalSection heading="1. What FILEZILLA v2 is">
+      <LegalSection heading="1. What Tarang is">
         <p>
-          FILEZILLA v2 ("the app") is a client-side, peer-to-peer file transfer tool. It runs entirely in your
+          Tarang ("the app") is a client-side, peer-to-peer file transfer tool. It runs entirely in your
           browser: files are encrypted on the sending device and decrypted on the receiving device, and are
           transferred directly between the two devices over a WebRTC connection. A small signaling server helps two
           devices find each other and exchange connection details, but never receives file contents, file names, or

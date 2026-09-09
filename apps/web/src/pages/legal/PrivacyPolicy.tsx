@@ -6,7 +6,7 @@ export function PrivacyPolicy() {
     <LegalLayout title="Privacy Policy" updated="September 2026">
       <LegalSection heading="1. Summary">
         <p>
-          FILEZILLA v2 does not have user accounts, does not run analytics or advertising trackers, and does not
+          Tarang does not have user accounts, does not run analytics or advertising trackers, and does not
           upload your files or their contents to any server. File transfers happen directly between your device and
           the recipient's device (peer-to-peer), encrypted end-to-end. What follows is a precise, checkable breakdown
           of the small amount of data the app's signaling server does handle, and what stays on your device — see{" "}

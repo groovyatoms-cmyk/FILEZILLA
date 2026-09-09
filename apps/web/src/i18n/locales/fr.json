@@ -1,5 +1,5 @@
 {
-  "app": { "name": "FILEZILLA v2", "tagline": "Scannez. Connectez. Transférez.", "protected": "Protégé" },
+  "app": { "name": "Tarang", "tagline": "Scannez. Connectez. Transférez.", "protected": "Protégé" },
   "nav": {
     "newTransfer": "Nouveau transfert",
     "receive": "Recevoir",
@@ -27,7 +27,7 @@
     "hideDiagnostics": "Masquer les détails de diagnostic"
   },
   "dashboard": {
-    "title": "FILEZILLA v2",
+    "title": "Tarang",
     "dropHere": "Déposez les fichiers ici",
     "or": "ou",
     "selectFiles": "Sélectionner des fichiers",

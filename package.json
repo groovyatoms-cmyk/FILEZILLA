@@ -2,7 +2,7 @@
   "name": "secure-transfer",
   "private": true,
   "version": "0.1.0",
-  "description": "Secure P2P file transfer application (SecureTransfer)",
+  "description": "Secure P2P file transfer application (Tarang)",
   "workspaces": [
     "packages/*",
     "apps/*"

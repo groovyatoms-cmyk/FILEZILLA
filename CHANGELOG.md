@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to FILEZILLA v2 are documented in this file.
+All notable changes to Tarang are documented in this file.
 
 ## [Unreleased] — UI redesign, reliability fixes, PWA support, legal/consent
 
@@ -32,6 +32,11 @@ All notable changes to FILEZILLA v2 are documented in this file.
 - Rebranded the app header/title from "SecureTransfer" to "FILEZILLA v2"; comic-style
   visual redesign using the Ink Black / Prussian Blue / Oxford Navy / School Bus Yellow /
   Gold palette and Poppins throughout, plus a footer credit.
+- Renamed again, from "FILEZILLA v2" to **Tarang** (Hindi for "wave" — a nod to the
+  wireless connection carrying the transfer, and to the app's roots) — "FILEZILLA v2"
+  was too close to FileZilla, an established, unrelated FTP client. Updated everywhere
+  the name is user-visible: page title, PWA manifest, all five locales' `app.name`, and
+  every doc. Internal `@securetransfer/*` package names are unchanged.
 - Default theme changed to dark; Settings' toggle switch visuals were corrected.
 - Widened the Settings dropdown ranges for chunk size, parallel chunks, and bandwidth
   limit.

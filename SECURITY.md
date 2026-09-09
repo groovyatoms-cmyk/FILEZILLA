@@ -1,6 +1,6 @@
-# Security Model & Threat Model — FILEZILLA v2
+# Security Model & Threat Model — Tarang
 
-This document describes, precisely, what FILEZILLA v2 protects against, what it does
+This document describes, precisely, what Tarang protects against, what it does
 not, and why. It intentionally avoids marketing language ("military-grade", "100%
 secure", "unhackable") — every claim below is meant to be checkable against the code in
 `packages/crypto`, `packages/protocol`, `apps/signaling`, and `apps/web/src/features`.
@@ -115,13 +115,13 @@ For each threat: **Impact**, **Mitigation**, **Residual risk**.
 ### Malicious files sent through the app
 - **Impact:** A sender could deliberately send malware or an executable to trick a
   receiver into running it.
-- **Mitigation:** FILEZILLA v2 blocks a defined set of executable/installer file
+- **Mitigation:** Tarang blocks a defined set of executable/installer file
   extensions and MIME types outright (`apps/web/src/utils/file-filter.ts`) — `.exe`,
   `.msi`, `.apk`, `.dmg`, `.pkg`, `.deb`, `.rpm`, `.jar`, shell/batch/VBScript files, and
   similar — so the app cannot be used to hand a receiver a directly-executable payload.
 - **Residual risk:** This is a content-type filter, not malware scanning. Non-executable
   file types (documents, archives, media) can still carry malicious payloads exploitable
-  by vulnerabilities in whatever application later opens them. FILEZILLA v2 does not
+  by vulnerabilities in whatever application later opens them. Tarang does not
   scan file contents for malware — treat any received file with the same caution you would
   apply to an email attachment from the same sender.
 
@@ -160,7 +160,7 @@ For each threat: **Impact**, **Mitigation**, **Residual risk**.
 ### Device impersonation
 - **Impact:** A device claims to be a previously-paired device it isn't.
 - **Mitigation:** Device identities are locally generated random IDs, not attested
-  identities — FILEZILLA v2 does not claim strong device attestation. Each transfer's
+  identities — Tarang does not claim strong device attestation. Each transfer's
   security rests entirely on the fresh ECDH exchange for that session, not on a
   long-lived device identity, so impersonating a device label has no cryptographic effect.
 - **Residual risk:** The "paired devices" list (Devices screen) is a convenience/audit
@@ -209,7 +209,7 @@ For each threat: **Impact**, **Mitigation**, **Residual risk**.
   traffic and could, in principle, attempt to inspect or tamper with it.
 - **Mitigation:** WebRTC's DTLS-SRTP is end-to-end between the two peers even across a
   TURN relay — a TURN server forwards encrypted datagrams without terminating DTLS.
-  FILEZILLA v2's application-layer AES-256-GCM (§1) adds a second layer that a TURN
+  Tarang's application-layer AES-256-GCM (§1) adds a second layer that a TURN
   operator cannot decrypt even if DTLS were somehow bypassed, since it never has the
   ECDH-derived key.
   The UI always discloses when a connection is relayed via the connection-kind indicator
@@ -264,7 +264,7 @@ This repository ships a *reference* signaling server. Operators are responsible 
 - Serving it over **WSS** (TLS), not plain `ws://`, in any non-local deployment.
 - Not logging request bodies at the reverse-proxy/load-balancer layer (the app's own
   logging already avoids sensitive content — see `apps/signaling/src/logger.ts`).
-- Configuring their own TURN credentials if TURN fallback is desired; FILEZILLA v2 does
+- Configuring their own TURN credentials if TURN fallback is desired; Tarang does
   not ship or endorse a specific TURN provider.
 
 ## 7. Known limitations (see also README "Limitations")

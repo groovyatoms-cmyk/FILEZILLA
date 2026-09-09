@@ -1,4 +1,4 @@
-# How to Use FILEZILLA v2
+# How to Use Tarang
 
 A quick walkthrough of pairing two devices and sending files. For setup/development
 instructions see [README.md](./README.md); for what's actually protected and how, see
@@ -17,7 +17,7 @@ You need two devices (or two browser windows/tabs for local testing), each with:
 
 ## Sending a file
 
-1. Open FILEZILLA v2 and choose **New Transfer** (or drop files straight onto the
+1. Open Tarang and choose **New Transfer** (or drop files straight onto the
    Dashboard).
 2. Select the files or folder you want to send, then **Continue**.
    - Executable/installer file types (`.exe`, `.apk`, `.dmg`, `.msi`, and similar) are
@@ -43,7 +43,7 @@ QR screen) — if it expires before the receiver finishes scanning, just start o
 
 ## Receiving a file
 
-1. Open FILEZILLA v2 and choose **Receive**.
+1. Open Tarang and choose **Receive**.
 2. Grant camera access when prompted.
 3. Point your camera at the sender's QR code and hold it steady. Scanned parts are
    checked off live (✓ 1, ✓ 2, ○ 3, …) — you can scan them in any order, and re-scanning
@@ -98,7 +98,7 @@ tab bar.
 ## Installing it as an app
 
 On browsers that support it (Chromium-based desktop/Android, or Safari on iOS via Share
-→ Add to Home Screen), FILEZILLA v2 can be installed and launches without browser
+→ Add to Home Screen), Tarang can be installed and launches without browser
 chrome, like a native app. This doesn't change what the app can do — it's still the same
 in-browser, peer-to-peer transfer described above — it just gives it its own icon and
 window.
@@ -112,7 +112,7 @@ and the app keeps working normally; it just won't remember those preferences on 
 next visit. You can change your mind at any time from the Cookie Policy page (linked
 from Settings and the footer), which also explains exactly what's stored and why.
 
-Settings → Privacy spells out exactly what FILEZILLA v2 does and doesn't do with your
+Settings → Privacy spells out exactly what Tarang does and doesn't do with your
 data, and the footer links to the Terms of Use, Privacy Policy, and Cookie Policy pages.
 In short: files are encrypted on your device before they ever leave it, the signaling
 server never sees file contents or your encryption key, and pairing sessions expire

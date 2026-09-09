@@ -52,7 +52,7 @@ export function CookiePolicy() {
         )}
       </LegalSection>
 
-      <LegalSection heading="1. FILEZILLA v2 does not use cookies">
+      <LegalSection heading="1. Tarang does not use cookies">
         <p>
           The app sets no HTTP cookies at all. There is no server-side session, no login, and nothing to track you
           across sites. What it does use — and what the choice above controls — is your browser's own local storage

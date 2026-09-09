@@ -1,5 +1,5 @@
 {
-  "app": { "name": "FILEZILLA v2", "tagline": "Scannen. Verbinden. Übertragen.", "protected": "Geschützt" },
+  "app": { "name": "Tarang", "tagline": "Scannen. Verbinden. Übertragen.", "protected": "Geschützt" },
   "nav": {
     "newTransfer": "Neue Übertragung",
     "receive": "Empfangen",
@@ -27,7 +27,7 @@
     "hideDiagnostics": "Diagnosedetails ausblenden"
   },
   "dashboard": {
-    "title": "FILEZILLA v2",
+    "title": "Tarang",
     "dropHere": "Dateien hier ablegen",
     "or": "oder",
     "selectFiles": "Dateien auswählen",

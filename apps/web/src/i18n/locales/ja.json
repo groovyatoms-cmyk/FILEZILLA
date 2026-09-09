@@ -1,5 +1,5 @@
 {
-  "app": { "name": "FILEZILLA v2", "tagline": "スキャンして接続、転送する。", "protected": "保護済み" },
+  "app": { "name": "Tarang", "tagline": "スキャンして接続、転送する。", "protected": "保護済み" },
   "nav": {
     "newTransfer": "新規転送",
     "receive": "受信",
@@ -26,7 +26,7 @@
     "hideDiagnostics": "診断の詳細を非表示"
   },
   "dashboard": {
-    "title": "FILEZILLA v2",
+    "title": "Tarang",
     "dropHere": "ここにファイルをドロップ",
     "or": "または",
     "selectFiles": "ファイルを選択",

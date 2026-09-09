@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CHUNK_SIZE_PRESETS } from "@securetransfer/shared";
 import { Card, CardBody, CardHeader } from "../components/ui/Card";
@@ -202,6 +203,21 @@ export function Settings() {
             <li>✓ Integrity is verified after every transfer.</li>
             <li>✓ Pairing sessions expire automatically.</li>
           </ul>
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader className="text-sm font-semibold text-ink">Legal</CardHeader>
+        <CardBody role="group" aria-label="Legal" className="flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
+          <Link to="/legal/terms" className="font-medium text-ink underline underline-offset-2 hover:text-accent">
+            Terms of Use
+          </Link>
+          <Link to="/legal/privacy" className="font-medium text-ink underline underline-offset-2 hover:text-accent">
+            Privacy Policy
+          </Link>
+          <Link to="/legal/cookies" className="font-medium text-ink underline underline-offset-2 hover:text-accent">
+            Cookie Policy
+          </Link>
         </CardBody>
       </Card>
 

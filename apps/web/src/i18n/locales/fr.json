@@ -5,7 +5,10 @@
     "receive": "Recevoir",
     "devices": "Appareils",
     "history": "Historique",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "menu": "Menu",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
   "common": {
     "cancel": "Annuler",
@@ -142,6 +145,13 @@
     "themeSystem": "Système",
     "language": "Langue",
     "downloadLocation": "Emplacement de téléchargement par défaut"
+  },
+  "cookieBanner": {
+    "title": "Avis relatif aux cookies",
+    "message": "Cette application utilise le stockage local de votre navigateur sur votre appareil (pas de cookies de suivi) pour se souvenir par exemple de votre thème et de votre historique de transferts.",
+    "learnMore": "En savoir plus",
+    "accept": "Accepter",
+    "reject": "Refuser"
   },
   "errors": {
     "connectionFailedTitle": "Impossible d'établir une connexion sécurisée.",

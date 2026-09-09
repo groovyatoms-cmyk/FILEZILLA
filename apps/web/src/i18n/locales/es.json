@@ -5,7 +5,10 @@
     "receive": "Recibir",
     "devices": "Dispositivos",
     "history": "Historial",
-    "settings": "Ajustes"
+    "settings": "Ajustes",
+    "menu": "Menú",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "common": {
     "cancel": "Cancelar",
@@ -142,6 +145,13 @@
     "themeSystem": "Sistema",
     "language": "Idioma",
     "downloadLocation": "Ubicación de descarga predeterminada"
+  },
+  "cookieBanner": {
+    "title": "Aviso de cookies",
+    "message": "Esta app usa almacenamiento local de tu navegador en tu dispositivo (no cookies de rastreo) para recordar cosas como tu tema y tu historial de transferencias.",
+    "learnMore": "Más información",
+    "accept": "Aceptar",
+    "reject": "Rechazar"
   },
   "errors": {
     "connectionFailedTitle": "No se pudo establecer una conexión segura.",

@@ -165,15 +165,19 @@ export function QRScanner({ onDetect, paused = false }: QRScannerProps) {
   );
 }
 
-/** Corner-bracket scan frame — communicates "point here" without a solid box occluding the QR. */
+/** Corner-bracket scan frame — communicates "point here" without a solid box occluding the QR.
+ * A QR code is square, so the guide is kept square (sized off the container's height, the
+ * shorter side of the 16:9 preview) rather than stretching to the video's own aspect ratio. */
 function ScanFrame() {
   const corner = "absolute h-8 w-8 border-white";
   return (
-    <div className="pointer-events-none absolute inset-8" aria-hidden="true">
-      <div className={`${corner} left-0 top-0 border-l-4 border-t-4 rounded-tl-lg`} />
-      <div className={`${corner} right-0 top-0 border-r-4 border-t-4 rounded-tr-lg`} />
-      <div className={`${corner} bottom-0 left-0 border-b-4 border-l-4 rounded-bl-lg`} />
-      <div className={`${corner} bottom-0 right-0 border-b-4 border-r-4 rounded-br-lg`} />
+    <div className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
+      <div className="relative aspect-square h-[70%]">
+        <div className={`${corner} left-0 top-0 border-l-4 border-t-4 rounded-tl-lg`} />
+        <div className={`${corner} right-0 top-0 border-r-4 border-t-4 rounded-tr-lg`} />
+        <div className={`${corner} bottom-0 left-0 border-b-4 border-l-4 rounded-bl-lg`} />
+        <div className={`${corner} bottom-0 right-0 border-b-4 border-r-4 rounded-br-lg`} />
+      </div>
     </div>
   );
 }

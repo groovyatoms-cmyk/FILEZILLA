@@ -22,6 +22,14 @@ See [SECURITY.md](./SECURITY.md) for the full threat model and precise security 
 | **Architecture priorities** | P2P transfer, end-to-end encryption, minimal server trust, chunked/resumable transfer, integrity verification, secure pairing, privacy, responsiveness under large transfers. |
 | **Explicitly not** | A cloud upload/storage service. No file ever needs to be stored server-side for the transfer to complete. |
 
+On mobile/tablet widths, the sidebar becomes a slide-in drawer opened from a six-dot menu
+button next to the logo (`apps/web/src/components/Sidebar.tsx`). A cookie/local-storage
+consent banner is shown on first visit (`components/CookieConsentBanner.tsx`); "Reject"
+immediately clears and stops writing non-essential local data (theme, settings, transfer
+history, remembered paired devices) while leaving the app fully usable — see
+`utils/consent.ts` and the in-app Cookie Policy (`/legal/cookies`, also linked from
+Settings and the footer) alongside the Terms of Use and Privacy Policy pages.
+
 ## 2. Architecture
 
 ```

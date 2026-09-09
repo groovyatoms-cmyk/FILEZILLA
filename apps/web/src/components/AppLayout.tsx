@@ -1,17 +1,30 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { useState } from "react";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Download, Heart, Plus, QrCode, ShieldCheck } from "lucide-react";
+import { Download, Grip, Heart, Plus, QrCode, ShieldCheck } from "lucide-react";
 import { Sidebar } from "./Sidebar";
 import { Badge } from "./ui/Badge";
 
 export function AppLayout() {
   const { t } = useTranslation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div className="flex h-full min-h-screen bg-canvas">
-      <Sidebar />
+      <Sidebar mobileOpen={mobileMenuOpen} onMobileClose={() => setMobileMenuOpen(false)} />
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex items-center justify-between border-b-2 border-ink bg-surface px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))] md:px-6">
-          <span className="text-base font-extrabold text-ink md:hidden">{t("app.name")}</span>
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label={t("nav.openMenu")}
+              aria-expanded={mobileMenuOpen}
+              className="focus-ring flex h-8 w-8 items-center justify-center rounded-md border-2 border-ink text-ink"
+            >
+              <Grip size={16} aria-hidden="true" />
+            </button>
+            <span className="text-base font-extrabold text-ink">{t("app.name")}</span>
+          </div>
           <span className="hidden text-sm text-ink-muted md:block" />
           <Badge tone="success" icon={<ShieldCheck size={12} />}>
             {t("app.protected")}
@@ -21,8 +34,21 @@ export function AppLayout() {
           <div className="flex-1">
             <Outlet />
           </div>
-          <footer className="mx-auto mt-12 flex w-full max-w-3xl shrink-0 items-center justify-center gap-1 border-t-2 border-ink pt-4 text-center text-xs font-medium text-ink-muted">
-            Made with <Heart size={12} className="fill-danger text-danger" aria-label="love" /> in India by Soumitro Haldar
+          <footer className="mx-auto mt-12 flex w-full max-w-3xl shrink-0 flex-col items-center gap-2 border-t-2 border-ink pt-4 text-center text-xs font-medium text-ink-muted">
+            <div className="flex items-center gap-1">
+              Made with <Heart size={12} className="fill-danger text-danger" aria-label="love" /> in India by Soumitro Haldar
+            </div>
+            <nav className="flex items-center gap-3" aria-label="Legal">
+              <Link to="/legal/terms" className="hover:text-ink hover:underline">
+                Terms of Use
+              </Link>
+              <Link to="/legal/privacy" className="hover:text-ink hover:underline">
+                Privacy Policy
+              </Link>
+              <Link to="/legal/cookies" className="hover:text-ink hover:underline">
+                Cookie Policy
+              </Link>
+            </nav>
           </footer>
         </main>
         <nav

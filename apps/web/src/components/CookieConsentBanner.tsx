@@ -4,9 +4,17 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/Button";
 import { acceptStorageConsent, getStorageConsent, rejectStorageConsent } from "../utils/consent";
 
-/** Shown once, on first visit, until the user makes a choice. See the Cookie Policy page
+/**
+ * Shown once, on first visit, until the user makes a choice. See the Cookie Policy page
  * (also linked from Settings) to change the choice afterward — suppressed there since that
- * page already has its own Accept/Reject controls; showing both would just be confusing. */
+ * page already has its own Accept/Reject controls; showing both would just be confusing.
+ *
+ * Rendered in normal document flow (between the header and the scrollable content in
+ * AppLayout), not as a `position: fixed` overlay. A fixed banner previously overlapped the
+ * app's own fixed chrome — the bottom tab bar on mobile, or the header's menu button once
+ * moved to the top — leaving Accept/Reject unreachable on some screens. In-flow placement
+ * can't occlude anything, on any screen size, without breakpoint-specific positioning.
+ */
 export function CookieConsentBanner() {
   const { t } = useTranslation();
   const { pathname } = useLocation();
@@ -22,8 +30,7 @@ export function CookieConsentBanner() {
     <div
       role="dialog"
       aria-label={t("cookieBanner.title")}
-      className="fixed inset-x-3 bottom-3 z-50 mx-auto flex max-w-2xl flex-col gap-3 rounded-lg border-2 border-ink bg-surface p-4 shadow-comic animate-slide-up sm:flex-row sm:items-center sm:justify-between md:bottom-6 md:left-6 md:right-6"
-      style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
+      className="flex flex-col gap-3 border-b-2 border-ink bg-surface-raised px-4 py-3 animate-slide-up sm:flex-row sm:items-center sm:justify-between md:px-6"
     >
       <p className="text-sm text-ink">
         {t("cookieBanner.message")}{" "}

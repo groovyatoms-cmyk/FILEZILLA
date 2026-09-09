@@ -1,6 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AppLayout } from "./components/AppLayout";
-import { CookieConsentBanner } from "./components/CookieConsentBanner";
 import { Dashboard } from "./pages/Dashboard";
 import { Send } from "./pages/Send";
 import { Receive } from "./pages/Receive";
@@ -32,7 +31,6 @@ export function App() {
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </Routes>
-          <CookieConsentBanner />
         </BrowserRouter>
       </ToastProvider>
     </ThemeProvider>

@@ -1,10 +1,10 @@
-# SecureTransfer
+# FILEZILLA v2
 
 A privacy-first, end-to-end encrypted peer-to-peer file transfer application. Pair two
 devices by scanning a multi-part QR code, then transfer files directly between them —
 **Scan. Connect. Transfer.**
 
-SecureTransfer is not a cloud storage product. Files are chunked, encrypted on the
+FILEZILLA v2 is not a cloud storage product. Files are chunked, encrypted on the
 sender's device, sent over a direct WebRTC connection (falling back to a TURN relay only
 when a direct path isn't possible), decrypted on the receiver's device, and verified
 end-to-end. The signaling server that helps the two devices find each other never sees
@@ -257,7 +257,7 @@ the previous 700-byte default fails to decode at that size even with *zero* blur
 | Web Workers | Required for off-main-thread crypto; supported everywhere WebRTC is. |
 | Web app manifest + service worker (installability) | On supporting browsers (Chromium-based desktop/Android, Safari on iOS via "Add to Home Screen"), the app can be installed to the home screen/app list and launches in `standalone` display mode with no browser chrome. The service worker only does best-effort stale-while-revalidate caching of the app shell — it is not an offline-first cache of transfer data, and pairing/signaling connections still require a live network. |
 
-SecureTransfer cannot provide true OS-level background transfers, persistent
+FILEZILLA v2 cannot provide true OS-level background transfers, persistent
 background camera access, or guaranteed large-file writes on browsers/platforms that
 don't implement the File System Access API (notably Safari and Firefox as of this
 writing) — these are browser platform limits, not something a web app can work around.
@@ -306,6 +306,14 @@ correctly when signaling is unreachable).
 **Web app:** static build (`npm run build --workspace=apps/web` → `apps/web/dist`),
 deployable to any static host/CDN. Set `VITE_SIGNALING_URL` (and TURN vars, if used) at
 build time.
+
+Routing is entirely client-side (`react-router-dom`'s `BrowserRouter`), so the host must
+be told to serve `index.html` for any path — otherwise a hard reload or a shared link to
+anything but `/` (e.g. `/send`, `/legal/privacy`) 404s at the host level before React
+Router ever runs. `apps/web/public/_redirects` (`/*    /index.html   200`) covers this on
+Netlify and is copied into `dist/` automatically by Vite; other static hosts need their
+own equivalent (e.g. Vercel's `rewrites` in `vercel.json`, or an Nginx/Apache
+try-files/fallback rule pointing everything at `index.html`).
 
 **Signaling server:** `npm run build --workspace=apps/signaling` produces a single
 bundled `dist/server.js` (via esbuild; only the `ws` runtime dependency stays external).

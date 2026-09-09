@@ -1,6 +1,6 @@
 # @securetransfer/web
 
-The SecureTransfer web client (Vite + React + TypeScript + Tailwind CSS).
+The FILEZILLA v2 web client (Vite + React + TypeScript + Tailwind CSS).
 
 See the [repository root README](../../README.md) for the full product overview,
 architecture, and setup instructions, and [SECURITY.md](../../SECURITY.md) for the

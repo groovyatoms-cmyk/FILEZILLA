@@ -36,6 +36,30 @@ test.describe("cookie consent banner", () => {
     await page.getByRole("button", { name: "Accept" }).click();
     await expect(page.getByText("Currently allowed")).toBeVisible();
   });
+
+  test("on mobile, the banner doesn't overlap the header's menu button or the bottom tab bar", async ({ page }) => {
+    // The banner used to be `position: fixed`, first anchored to the bottom (overlapping the
+    // app's own fixed bottom tab bar) and, in a later attempt, to the top (overlapping the
+    // header's "Open menu" button instead) — either way leaving a button unreachable on real
+    // mobile screens. Rendering it in normal document flow, between the header and the
+    // scrollable content, rules out that whole class of bug rather than re-tuning breakpoints.
+    // Asserting these clicks actually succeed (not just that the buttons exist) is what would
+    // have caught the regression.
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    const banner = page.getByRole("dialog", { name: "Cookie notice" });
+    await expect(banner).toBeVisible();
+
+    await page.getByRole("button", { name: "Open menu" }).click();
+    const drawerNav = page.getByRole("navigation", { name: "Menu" });
+    await expect(drawerNav).toBeVisible();
+    await drawerNav.getByRole("link", { name: "Settings" }).click();
+    await expect(page).toHaveURL(/\/settings$/);
+
+    await expect(banner).toBeVisible();
+    await banner.getByRole("button", { name: "Reject" }).click();
+    await expect(banner).toBeHidden();
+  });
 });
 
 test.describe("legal pages", () => {

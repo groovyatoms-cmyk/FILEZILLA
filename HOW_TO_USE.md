@@ -1,4 +1,4 @@
-# How to Use SecureTransfer
+# How to Use FILEZILLA v2
 
 A quick walkthrough of pairing two devices and sending files. For setup/development
 instructions see [README.md](./README.md); for what's actually protected and how, see
@@ -17,7 +17,7 @@ You need two devices (or two browser windows/tabs for local testing), each with:
 
 ## Sending a file
 
-1. Open SecureTransfer and choose **New Transfer** (or drop files straight onto the
+1. Open FILEZILLA v2 and choose **New Transfer** (or drop files straight onto the
    Dashboard).
 2. Select the files or folder you want to send, then **Continue**.
    - Executable/installer file types (`.exe`, `.apk`, `.dmg`, `.msi`, and similar) are
@@ -43,7 +43,7 @@ QR screen) — if it expires before the receiver finishes scanning, just start o
 
 ## Receiving a file
 
-1. Open SecureTransfer and choose **Receive**.
+1. Open FILEZILLA v2 and choose **Receive**.
 2. Grant camera access when prompted.
 3. Point your camera at the sender's QR code and hold it steady. Scanned parts are
    checked off live (✓ 1, ✓ 2, ○ 3, …) — you can scan them in any order, and re-scanning
@@ -87,13 +87,34 @@ QR screen) — if it expires before the receiver finishes scanning, just start o
 - **History** lists past transfers with filters for sent/received/completed/failed.
 - **Settings** covers transfer behavior (auto-start, chunk size, bandwidth limit),
   security (ask-before-receiving, session expiration, clearing history), network
-  (prefer direct P2P, allow TURN fallback, connection timeout), and appearance (light/
-  dark/system theme, language).
+  (prefer direct P2P, allow TURN fallback, connection timeout), appearance (light/
+  dark/system theme, language), and a **Legal** section linking to the Terms of Use,
+  Privacy Policy, and Cookie Policy.
 
-## Privacy, in one screen
+On phone/tablet widths, all five sections are reachable from a menu opened by the
+six-dot button next to the logo, in addition to New Transfer/Receive/Scan on the bottom
+tab bar.
 
-Settings → Privacy spells out exactly what SecureTransfer does and doesn't do with your
-data. In short: files are encrypted on your device before they ever leave it, the
-signaling server never sees file contents or your encryption key, and pairing sessions
-expire automatically. See [SECURITY.md](./SECURITY.md) for the full technical detail
-behind every one of those statements.
+## Installing it as an app
+
+On browsers that support it (Chromium-based desktop/Android, or Safari on iOS via Share
+→ Add to Home Screen), FILEZILLA v2 can be installed and launches without browser
+chrome, like a native app. This doesn't change what the app can do — it's still the same
+in-browser, peer-to-peer transfer described above — it just gives it its own icon and
+window.
+
+## Privacy, cookies, and legal
+
+The first time you open the app, a small banner asks whether it's okay to remember
+things like your theme and transfer history in your browser's local storage — not
+tracking cookies, just on-device preferences. **Reject** clears that data immediately
+and the app keeps working normally; it just won't remember those preferences on your
+next visit. You can change your mind at any time from the Cookie Policy page (linked
+from Settings and the footer), which also explains exactly what's stored and why.
+
+Settings → Privacy spells out exactly what FILEZILLA v2 does and doesn't do with your
+data, and the footer links to the Terms of Use, Privacy Policy, and Cookie Policy pages.
+In short: files are encrypted on your device before they ever leave it, the signaling
+server never sees file contents or your encryption key, and pairing sessions expire
+automatically. See [SECURITY.md](./SECURITY.md) for the full technical detail behind
+every one of those statements.

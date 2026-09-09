@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Download, Grip, Heart, Plus, QrCode, ShieldCheck } from "lucide-react";
 import { Sidebar } from "./Sidebar";
 import { Badge } from "./ui/Badge";
+import { CookieConsentBanner } from "./CookieConsentBanner";
 
 export function AppLayout() {
   const { t } = useTranslation();
@@ -30,6 +31,7 @@ export function AppLayout() {
             {t("app.protected")}
           </Badge>
         </header>
+        <CookieConsentBanner />
         <main className="flex flex-1 flex-col overflow-y-auto px-4 py-6 pb-24 md:px-8 md:py-8 md:pb-8">
           <div className="flex-1">
             <Outlet />

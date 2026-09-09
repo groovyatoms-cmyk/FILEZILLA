@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import type { AppSettings } from "@securetransfer/shared";
+import { isOptionalStorageAllowed } from "../utils/consent";
 
 const THEME_STORAGE_KEY = "securetransfer:theme";
 const DEFAULT_THEME: ThemePreference = "dark";
@@ -54,6 +55,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const setTheme = useCallback((next: ThemePreference) => {
     setThemeState(next);
+    if (!isOptionalStorageAllowed()) return;
     try {
       localStorage.setItem(THEME_STORAGE_KEY, next);
     } catch {

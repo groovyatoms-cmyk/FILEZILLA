@@ -1,4 +1,5 @@
 import type { DeviceIdentity } from "@securetransfer/shared";
+import { isOptionalStorageAllowed } from "../utils/consent";
 import { STORES, dbGet, dbGetAll, dbPut, dbDelete } from "./db";
 
 const DEVICE_KEY = "this";
@@ -52,6 +53,7 @@ export async function listPairedDevices(): Promise<PairedDeviceRecord[]> {
 }
 
 export async function recordPairedDevice(device: PairedDeviceRecord): Promise<void> {
+  if (!isOptionalStorageAllowed()) return;
   await dbPut(STORES.pairedDevices, device);
 }
 

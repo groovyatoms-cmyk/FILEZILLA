@@ -1,4 +1,5 @@
 import { DEFAULT_SETTINGS, type AppSettings } from "@securetransfer/shared";
+import { isOptionalStorageAllowed } from "../utils/consent";
 import { STORES, dbGet, dbPut } from "./db";
 
 const SETTINGS_KEY = "app";
@@ -9,5 +10,6 @@ export async function loadSettings(): Promise<AppSettings> {
 }
 
 export async function saveSettings(settings: AppSettings): Promise<void> {
+  if (!isOptionalStorageAllowed()) return;
   await dbPut(STORES.settings, settings, SETTINGS_KEY);
 }

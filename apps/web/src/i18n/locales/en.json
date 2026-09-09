@@ -5,7 +5,10 @@
     "receive": "Receive",
     "devices": "Devices",
     "history": "History",
-    "settings": "Settings"
+    "settings": "Settings",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "common": {
     "cancel": "Cancel",
@@ -142,6 +145,13 @@
     "themeSystem": "System",
     "language": "Language",
     "downloadLocation": "Default download location"
+  },
+  "cookieBanner": {
+    "title": "Cookie notice",
+    "message": "This app uses local browser storage on your device (not tracking cookies) to remember things like your theme and transfer history.",
+    "learnMore": "Learn more",
+    "accept": "Accept",
+    "reject": "Reject"
   },
   "errors": {
     "connectionFailedTitle": "Unable to establish a secure connection.",
